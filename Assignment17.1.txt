@@ -1,0 +1,47 @@
+1. What is NoSQL data base?
+Answer: A NoSQL (originally referring to "non SQL", "non relational" or "not only SQL")[1] database provides a mechanism for storage and retrieval of data which is modeled in means other than the tabular relations used in relational databases.
+Features of NoSQL:
+Generic data model
+• Heterogeneous containers, including sets, maps, and arrays
+
+Dynamic type discovery and conversion
+• NoSQL analytics systems support runtime type identification and conversion so that custom business logic can be used to dictate analytic treatment of variation.
+
+Non-relational and De-normalised
+• Data is stored in single tables as compared to joining multiple tables.
+
+Commodity hardware
+• Adding more of the economical servers allows NoSQL databases to scale to handle more data.
+
+Highly distributable
+• Distributed databases can store and process a set of information on more than one device.
+
+
+2. How does data get stored in NoSQl database?
+	Document Oriented Databases (MongoDB): Stores documents as a data and allows indexing of documents on the basis of not only its primary identifier but also its properties
+	Graph Based Databases (Neo4j): A graph database uses graph structures with nodes, edges, and properties to represent and store data.
+	Column Based Databases (HBase): The column-oriented storage allows data to be stored effectively. It avoids consuming space when storing nulls by simply not storing a column when a value doesn’t exist for that column.
+	Key Value Databases (Membase): The key of a key/value pair is a unique value in the set and can be easily looked up to access the data.
+
+
+3. What is a column family in HBase?
+	Collection of columns having multiple actual columns inside.
+
+4. How many maximum number of columns can be added to HBase table?
+	There is no hard limit to number of columns in HBase , we can have more than 1 million columns but usually three column families are recommended ( not more than three).
+
+5. Why columns are not defined at the time of table creation in HBase?
+	Column families are defined rather than defining columns since columns are dynamic in HBase, which can be different for each records.
+
+6. How does data get managed in HBase?
+	• Region servers serve data for reads and writes.
+	• HBase Master process handles the Region assignment, DDL (create, delete tables) operations
+	• Zookeeper maintains a live cluster state.
+
+
+7. What happens internally when new data gets inserted into HBase table?
+	• HBase Tables are divided horizontally by row key range into “Regions.”
+	• A region contains all rows in the table between the region’s start key and end key.
+	• Regions are assigned to the nodes in the cluster, called “Region Servers,” and these serve
+data for reads and writes.
+	• A region server can serve about 1,000 regions.
