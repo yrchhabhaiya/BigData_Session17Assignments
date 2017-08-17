@@ -1,0 +1,39 @@
+Create an HBase table named 'clicks' with a column family 'hits' such that it should be able to store last 5 values of qualifiers inside 'hits' column family.
+
+Commands:
+create 'clicks', {NAME=>'hits', VERSIONS=>5}
+
+
+
+Add few records in the table and update some of them. Use IP Address as row-key. Scan the table to view if all the previous versions are getting displayed.
+
+Commands:
+put 'clicks','10.217.215.98','hits:site','https://www.google.co.in'
+put 'clicks','10.217.215.99','hits:site','https://www.wikipedia.org'
+put 'clicks','10.217.215.100','hits:site','https://www.facebook.com'
+put 'clicks','10.217.215.101','hits:site','https://acadgild.com'
+put 'clicks','10.217.215.102','hits:site','https://www.quora.com'
+
+scan 'clicks'
+
+put 'clicks','10.217.215.98','hits:site','https://www.quora.com'
+put 'clicks','10.217.215.99','hits:site','https://www.quora.com'
+
+put 'clicks','10.217.215.98','hits:site','https://www.facebook.com'
+put 'clicks','10.217.215.99','hits:site','https://www.facebook.com'
+
+put 'clicks','10.217.215.98','hits:site','https://acadgild.com'
+put 'clicks','10.217.215.99','hits:site','https://acadgild.com'
+
+put 'clicks','10.217.215.98','hits:site','https://www.youtube.com/'
+put 'clicks','10.217.215.99','hits:site','https://www.youtube.com/'
+
+scan 'clicks',{COLUMN=>'hits:site',VERSIONS=>5}
+
+scan ‘clicks’
+
+put 'clicks','10.217.215.98','hits:site','https://www.tesla.com/'
+put 'clicks','10.217.215.99','hits:site','https://www.tesla.com/'
+
+scan 'clicks',{COLUMN=>'hits:site',VERSIONS=>6}
+
